@@ -1,16 +1,26 @@
-# InnerMatch
-
-**InnerMatch**
-**Self-improving vector matcher that learns what the user meant, not just what they clicked.**
-
-InnerMatch is an adaptive search engine core.
-You give it **binary vectors** representing attributes, and it learns, from the user’s behavior, what attributes truly matter.
-
-The more feedback you send, the smarter it becomes **inside the same search session**.
-
-> Yes: InnerMatch literally evolves during a search session.
-
+# Synaptosearch InnerMatch
 ---
+
+**Introduction**
+- This matching framework not only provides matching functionality between two data items, but also helps the user discover and understand what he/she is truly looking for, by providing feedback capability to the user and also extracting and representing underlying hidden aspects that the user might not be aware of, regarding his/her preferences.
+---
+
+**Key Product features**
+
+- **Feature scalability**: Using existing (deep learning) models, developers are not able to extend or limit the feature space during runtime, while in the real world, this capability can be considered a valuable feature.
+
+- **Interactiveness**: Existing applications, except recommender systems, do not really incorporate feedback from the users, while this feedback could be valuable in reshaping the matching algorithm for the future.
+
+- **No Cold start**: While learning algorithms require a lot of data for training, matching algorithms usually suffer from the cold start problem, in which the performance of the matching is low in initial steps and interactions until the algorithm gathers enough data to learn the underlying patterns. A matching algorithm that can 1- start from a reasonable starting point and 2- learn fast in terms of the amount of data required to train the model, can be of a valuable benefit.
+
+- **Dimensional search**: Existing matching algorithms, even though some of which consider user feedback, don’t explore the feature space for relevant dimensions in performing the match, while searching through the dimensional space of input through interactions could provide valuable insight about what features really contribute to the match more.
+
+- **Real-time requirements**: One of the most important requirements of the matching algorithm is its performance. As the matching algorithm is supposed to be called several times for each query, fast and simple computation capability of the matching algorithm is a valuable benefit.
+
+- **Dynamic preferences**: One of the main requirements of the matching algorithms is the ability to adapt to user dynamic preferences, as the user might change his/her preferences over time. A matching algorithm that is able to track the changes and adapt to them in an appropriate speed could provide additional value to the corresponding application.
+
+- **Modality agnosticism**: Existing matching algorithms purely rely on the modality of input data, while being able to combine and transform multiple modalities by encoding data into a unified representation can be valuable.
+
 
 ## Why InnerMatch exists
 
@@ -18,25 +28,113 @@ Users rarely know the exact keywords or filters to click.
 
 InnerMatch solves this:
 
-* HR says “I need Python, Kubernetes”
+* HR says, “I need Python, Kubernetes.”
 * HR clicks 3 jobs they like
 * InnerMatch learns what “Python, Kubernetes” MEANT for this specific HR person **in THIS search**, and returns more accurate matches next call.
 
 ---
 
-## Use-Cases
+# Examples of Business Use Cases
 
-| domain     |       features     | targets       |
-| ---------- | -----------------  | ------------- |
-| Job boards |         skill tags | job positions |
-| Ecommerce  | product attributes | products      |
-| Travel     |     hotel features | hotels        |
-| Dating     |   personality tags | profiles      |
+## Talent Matching (HR/Recruiting)
 
-etc.
+### use cases:
+- Personalized job matching that evolves with candidate preferences and career goals.
+- Hiring platforms that adapt based on recruiter or hiring manager feedback.
+- Discover latent candidate qualities (e.g., ambition, cultural alignment) beyond the resume.
+### Business Values:
+- Reduce time-to-hire by understanding real-fit factors early.
+- Decrease turnover by aligning deeper personal and cultural preferences.
+- Solve cold-start by offering quality matches even for new users or roles.
+---
 
-Any domain where “items” have sets of features.
+## Dating Apps
+### use cases:
+- Dynamic partner matching that evolves with the user’s romantic experiences and reflections.
+- Help users discover what traits actually matter to them through guided feedback.
+- Identify latent compatibility factors like communication style, values, or attachment types.
+### Business Values:
+- Boost user engagement and retention by personalizing the discovery journey.
+- Improve long-term match success rates.
+- Stand out with a "growth-focused" dating experience, not just swiping.
+---
 
+## Recommender Systems
+### use cases:
+- Adaptive product/content recommendation that learns from nuanced feedback over time.
+- Exploration of feature dimensions (e.g. tone, aesthetic, function) to discover preferences.
+- Cross-modal recommendations (text, image, video) based on unified user understanding.
+### Business Values:
+- Higher conversion rates through relevance and serendipity.
+- Reduced bounce rates by adapting fast to new or cold users.
+- More insightful analytics on why customers choose products.
+---
+
+## Learning Platforms
+### use cases:
+- Match learners with courses, contents or resources that evolve with their goals and learning pace.
+- Help users discover learning paths based on strengths, weaknesses, and goals they didn’t know they had.
+- Personalized mentor or study group matching.
+### Business Values:
+- Increase course completion and satisfaction rates.
+- Personalize education with minimal upfront data.
+- Enable lifelong, dynamic learner journeys.
+---
+
+# Enterprise Knowledge Discovery
+### use cases:
+- Match employees with documents, experts, or datasets even when they don’t know what exactly they need.
+- Enable contextual, real-time knowledge surfacing across departments.
+- Learn from feedback to improve future discovery relevance.
+### Business Values:
+- Reduce knowledge silos.
+- Speed up research, innovation, and collaboration.
+- Support tacit knowledge discovery via belief-based exploration.
+---
+
+# Information Retrieval
+### use cases:
+- Support exploratory queries in which the user doesn't yet know what to ask.
+- Help researchers find hidden, cross-disciplinary or latent relationships in data.
+- Feedback-informed retrieval that evolves with a researcher’s line of thinking.
+### Business Values:
+- Accelerate time to insight.
+- Enable production of new knowledge, not just retrieval of old.
+- Facilitate intellectual exploration in ambiguous or emergent domains.
+---
+
+# Search Engines
+### use cases:
+- Help users refine their beliefs and needs during search, not just serve known-intent queries.
+- Power belief-based, conversational or introspective search.
+- Disentangle intent dynamically through user feedback.
+### Business Values:
+- Improve query satisfaction even in complex or ill-defined searches.
+- Reduce abandonment by guiding users through query evolution.
+- Create next-gen search experiences that feel intelligent and empathetic.
+---
+
+# Real Estate
+### use cases:
+- Match users with properties based on evolving preferences like neighborhood vibes, emotional
+- resonance, lifestyle fit — not just filters.
+Use feedback to explore which features (e.g., lighting, layout, proximity) matter most.
+- Handle cold-start users through smart defaults and belief prompts.
+### Business Values:
+- Improve lead conversion by aligning with deeper homebuyer needs.
+- Shorten the property discovery cycle.
+- Deliver surprisingly relevant listings that increase engagement.
+---
+
+# Mentorship Programs
+### use cases:
+- Match mentors and mentees dynamically as interests, goals, and personalities evolve.
+- Capture and respond to feedback loops in mentorship satisfaction.
+- Suggest mentorship topics or pairings based on latent growth desires.
+### Business Values:
+- Enhance mentorship success and retention.
+- Enable scalable, personalized mentorship at institutions or enterprises.
+- Create self-improving networks through continuous feedback.
 ---
 
 ## Pre-Requisite
@@ -58,7 +156,7 @@ If HR chose: Python and Kubernetes → your query_vector becomes:
 [1,0,1,0]
 ```
 
-Each job position MUST have vector representation with exact **same index ordering**.
+Each job position MUST have a vector representation with exact **same index ordering**.
 
 Example, Job #17:
 
@@ -87,7 +185,7 @@ InnerMatch responds with ranked matches.
 
 Send those interactions as feedback to `/feedback`.
 
-### step 3, the model evolves in this session
+### Step 3, The model evolves in this session
 
 At any moment, call `/features` → InnerMatch will output the current importance weights it learned.
 
@@ -165,17 +263,17 @@ Note: You may send multiple feedback objects in one call as arrays.
 
 # FAQ
 
-### Can InnerMatch work with sparse high dimensional vectors?
+### Can InnerMatch work with sparse high-dimensional vectors?
 
 Yes. Even 20,000 + features is fine.
 
-### Does order of array indexes matter?
+### Does the order of array indexes matter?
 
 **Yes.** It must remain consistent across query + targets + feedback.
 
-### Can I update model during the same session any time?
+### Can I update the model during the same session at any time?
 
-Yes. InnerMatch is online learning, instant adaptive.
+Yes. InnerMatch is an online learning, instant and adaptive.
 
 ---
 
@@ -186,5 +284,5 @@ It is a **self-correcting matcher**.
 
 You send vectors, it learns, per user, per session.
 
-By the time user has interacted with 5–15 items, the system now understands **what they were really searching for**.
+By the time the user has interacted with 5–15 items, the system now understands **what they were really searching for**.
 
