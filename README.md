@@ -5,7 +5,42 @@
 - This matching framework not only provides matching functionality between two data items, but also helps the user discover and understand what he/she is truly looking for, by providing feedback capability to the user and also extracting and representing underlying hidden aspects that the user might not be aware of, regarding his/her preferences.
 ---
 
-**Key Product features**
+**How It Works**
+Euclidean distance has been vastly used as a measure of closeness and similarity between two vectors. In geometry, the measure is defined as the length of straight line segment connecting two points. Considering two vectors (array of numbers) X(1) and X(2), the Euclidean distance between the two vectors can be defined as
+follows:
+
+![Euclidean distance](image.png)
+In Machine Learning and Artificial Intelligence, each element of the vectors represents a meaningful feature of the data such as color, size, shape, orientation, etc. Considering the Euclidean distance as a measure of similarity, based on the formula above, we can see that the difference between the values of each feature in the two vectors has a role in computing the similarity. In a simple binary case for instance, where the value of each feature can be zero or one:
+The value of same features corresponding to the two vectors, should be similar in order to reduce the distance between two vectors and increase the similarity.
+
+## Current Problems
+Although this concept seems trivial and reasonable for matching two vectors, however we believe that Euclidean distance is missing some critical properties, some of which listed as follows:
+
+- **Cross feature effect**: In some applications we might need to consider the relation between different features in calculating the matching between two vectors. For instance, we might need a case where:
+If object A is a ball and object B is a racket, then the possibility of the two objects matching should increase.
+In this case if being a ball is one feature and being a racket is another feature, Euclidean distance would not be able to match two vectors having these features active in a binary case.
+
+- **Inhibition**: In some cases, we might need the presence of one feature in a
+vector prevent the presence of the same or other feature in the second
+vector. For instance, consider the case below:
+If object A is a bolts and object B is screwdriver, then the possibility of match between the two vectors should decrease. In this case, if being bolts is one feature and being screwdriver is another feature, Euclidean distance would not be able to reduce the possibility of match between two vectors containing them.
+
+- **Negative effect**: In some cases, we might need some features to affect thesimilarity negatively while the others affecting it positively. For instance, consider the following case:
+If we have some demographic features including gender and language, we might want the feature gender to have negative effect on the similarity, e.g. if both items (vectors) are male (or female) we would like to reduce the chance of match while having the same language would increase the chance
+of match. In such cases, standard Euclidean distance is not able to treat gender and language differently while computing the match between two vectors.
+---
+
+## Proposed Solution
+At Synaptosearch, we have been working of a new distance measure for Machine Learning and Artificial Intelligence applications that would provide the properties of cross feature effect, Inhibition and negative effect at the same time. The proposed method could be considered at high level as a ‘programmable distance measure’ where the required relation between the features to calculate the distance can be learned through feed-back during the execution of the algorithm in real-life scenarios. 
+The proposed solution, has the following benefits:
+- There is no required training and testing phase, unlike ordinary machine learning approaches and the algorithm learns the required relations between the features throughout the real-time online execution of the system.
+- The algorithm starts from the baseline Euclidean distance and improves gradually through getting feed-back from the corresponding system which complements the first benefit mentioned above.
+- The algorithm with some additional steps can potentially work on any type of vectors representing the data e.g. bag-of-words, clustered data, local representations, distributed representation, etc.
+- The algorithm works with a very light model to compute the distances which makes it very time and memory efficient.
+- The most important benefit of the algorithm is the ability to incorporate relations between features such as cross feature effects, inhibition and negative effect.
+- And finally, as mentioned before, the relation between features do not need to be hardcoded by an expert, while they can simply be learned through the feed-back given by the system.
+
+# Key Product Features
 
 - **Feature scalability**: Using existing (deep learning) models, developers are not able to extend or limit the feature space during the runtime, while in real world, this capability can be considered as a valuable feature.
 
@@ -23,11 +58,11 @@
 
 ---
 
-# Examples of Business Use cases
+# Examples Of Business Use Cases
 
 ## Talent Matching (HR/Recruiting)
 
-### use cases:
+### Use Cases:
 - Personalized job matching that evolves with candidate preferences and career goals.
 - Hiring platforms that adapt based on recruiter or hiring manager feedback.
 - Discover latent candidate qualities (e.g. ambition, cultural alignment) beyond the resume.
@@ -38,7 +73,7 @@
 ---
 
 ## Dating Apps
-### use cases:
+### Use Cases:
 - Dynamic partner matching that evolves with the user’s romantic experiences and reflections.
 - Help users discover what traits actually matter to them through guided feedback.
 - Identify latent compatibility factors like communication style, values, or attachment types.
@@ -49,7 +84,7 @@
 ---
 
 ## Recommender Systems
-### use cases:
+### Use Cases:
 - Adaptive product/content recommendation that learns from nuanced feedback over time.
 - Exploration of feature dimensions (e.g. tone, aesthetic, function) to discover preferences.
 - Cross-modal recommendations (text, image, video) based on unified user understanding.
@@ -60,7 +95,7 @@
 ---
 
 ## Learning Platforms
-### use cases:
+### Use Cases:
 - Match learners with courses, contents or resources that evolve with their goals and learning pace.
 - Help users discover learning paths based on strengths, weaknesses, and goals they didn’t know they had.
 - Personalized mentor or study group matching.
@@ -71,7 +106,7 @@
 ---
 
 # Enterprise Knowledge Discovery
-### use cases:
+### Use Cases:
 - Match employees with documents, experts, or datasets even when they don’t know what exactly they need.
 - Enable contextual, real-time knowledge surfacing across departments.
 - Learn from feedback to improve future discovery relevance.
@@ -82,7 +117,7 @@
 ---
 
 # Information Retrieval
-### use cases:
+### Use Cases:
 - Support exploratory queries in which the user doesn't yet know what to ask.
 - Help researchers find hidden, cross-disciplinary or latent relationships in data.
 - Feedback-informed retrieval that evolves with a researcher’s line of thinking.
@@ -93,7 +128,7 @@
 ---
 
 # Search Engines
-### use cases:
+### Use Cases:
 - Help users refine their beliefs and needs during search, not just serve known-intent queries.
 - Power belief-based, conversational or introspective search.
 - Disentangle intent dynamically through user feedback.
@@ -104,7 +139,7 @@
 ---
 
 # Real Estate
-### use cases:
+### Use Cases:
 - Match users with properties based on evolving preferences like neighborhood vibes, emotional
 - resonance, lifestyle fit — not just filters.
 Use feedback to explore which features (e.g. lighting, layout, proximity) matter most.
@@ -116,7 +151,7 @@ Use feedback to explore which features (e.g. lighting, layout, proximity) matter
 ---
 
 # Mentorship Programs
-### use cases:
+### Use Cases:
 - Match mentors and mentees dynamically as interests, goals, and personalities evolve.
 - Capture and respond to feedback loops in mentorship satisfaction.
 - Suggest mentorship topics or pairings based on latent growth desires.
