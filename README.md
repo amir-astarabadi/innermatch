@@ -10,6 +10,7 @@ Euclidean distance has been vastly used as a measure of closeness and similarity
 follows:
 
 ![Euclidean distance](Euclidean_distance.png)
+
 In Machine Learning and Artificial Intelligence, each element of the vectors represents a meaningful feature of the data such as color, size, shape, orientation, etc. Considering the Euclidean distance as a measure of similarity, based on the formula above, we can see that the difference between the values of each feature in the two vectors has a role in computing the similarity. In a simple binary case for instance, where the value of each feature can be zero or one:
 The value of same features corresponding to the two vectors, should be similar in order to reduce the distance between two vectors and increase the similarity.
 
