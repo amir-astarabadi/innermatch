@@ -7,41 +7,30 @@
 
 **Key Product features**
 
-- **Feature scalability**: Using existing (deep learning) models, developers are not able to extend or limit the feature space during runtime, while in the real world, this capability can be considered a valuable feature.
+- **Feature scalability**: Using existing (deep learning) models, developers are not able to extend or limit the feature space during the runtime, while in real world, this capability can be considered as a valuable feature.
 
-- **Interactiveness**: Existing applications, except recommender systems, do not really incorporate feedback from the users, while this feedback could be valuable in reshaping the matching algorithm for the future.
+- **Interactiveness**: Existing applications, except recommender systems, do not really incorporate feedback from the users, while these feedbacks could be valuable in reshaping the matching algorithm for future.
 
-- **No Cold start**: While learning algorithms require a lot of data for training, matching algorithms usually suffer from the cold start problem, in which the performance of the matching is low in initial steps and interactions until the algorithm gathers enough data to learn the underlying patterns. A matching algorithm that can 1- start from a reasonable starting point and 2- learn fast in terms of the amount of data required to train the model, can be of a valuable benefit.
+- **No Cold start**: While learning algorithms require a lot of data for training, matching algorithms usually suffer from the cold start problem in which the performance of the matching is low in initial steps and interactions until the algorithm gathers enough data to learn the underlying patterns. A matching algorithm that can, 1- start from a reasonable starting point and 2- learn fast in terms of amount of data required to train the model, can be of a valuable benefit.
 
-- **Dimensional search**: Existing matching algorithms, even though some of which consider user feedback, don’t explore the feature space for relevant dimensions in performing the match, while searching through the dimensional space of input through interactions could provide valuable insight about what features really contribute to the match more.
+- **Dimensional search**: Existing matching algorithms, even though some of which consider user feedbacks, don’t explore the feature space for relevant dimensions in performing the match, while searching through the dimensional space of input through interactions could provide valuable insight about what features really contribute to the match more.
 
 - **Real-time requirements**: One of the most important requirements of the matching algorithm is its performance. As the matching algorithm is supposed to be called several times for each query, fast and simple computation capability of the matching algorithm is a valuable benefit.
 
-- **Dynamic preferences**: One of the main requirements of the matching algorithms is the ability to adapt to user dynamic preferences, as the user might change his/her preferences over time. A matching algorithm that is able to track the changes and adapt to them in an appropriate speed could provide additional value to the corresponding application.
+- **Dynamic preferences**: One of the main requirements of the matching algorithms is the ability to adapt to user dynamic preferences, as the user might change his/her preferences along time. A matching algorithm that is able to track the changes and adapt to them in an appropriate speed could provide additional value to the corresponding application.
 
 - **Modality agnosticism**: Existing matching algorithms purely rely on the modality of input data, while being able to combine and transform multiple modalities by encoding data into a unified representation can be valuable.
 
-
-## Why InnerMatch exists
-
-Users rarely know the exact keywords or filters to click.
-
-InnerMatch solves this:
-
-* HR says, “I need Python, Kubernetes.”
-* HR clicks 3 jobs they like
-* InnerMatch learns what “Python, Kubernetes” MEANT for this specific HR person **in THIS search**, and returns more accurate matches next call.
-
 ---
 
-# Examples of Business Use Cases
+# Examples of Business Use cases
 
 ## Talent Matching (HR/Recruiting)
 
 ### use cases:
 - Personalized job matching that evolves with candidate preferences and career goals.
 - Hiring platforms that adapt based on recruiter or hiring manager feedback.
-- Discover latent candidate qualities (e.g., ambition, cultural alignment) beyond the resume.
+- Discover latent candidate qualities (e.g. ambition, cultural alignment) beyond the resume.
 ### Business Values:
 - Reduce time-to-hire by understanding real-fit factors early.
 - Decrease turnover by aligning deeper personal and cultural preferences.
@@ -118,7 +107,7 @@ InnerMatch solves this:
 ### use cases:
 - Match users with properties based on evolving preferences like neighborhood vibes, emotional
 - resonance, lifestyle fit — not just filters.
-Use feedback to explore which features (e.g., lighting, layout, proximity) matter most.
+Use feedback to explore which features (e.g. lighting, layout, proximity) matter most.
 - Handle cold-start users through smart defaults and belief prompts.
 ### Business Values:
 - Improve lead conversion by aligning with deeper homebuyer needs.
@@ -137,9 +126,9 @@ Use feedback to explore which features (e.g., lighting, layout, proximity) matte
 - Create self-improving networks through continuous feedback.
 ---
 
-## Pre-Requisite
+## Example
 
-You need **your feature space defined**.
+First you need define your feature space.
 
 Example: skills list in your HR database:
 
@@ -156,7 +145,7 @@ If HR chose: Python and Kubernetes → your query_vector becomes:
 [1,0,1,0]
 ```
 
-Each job position MUST have a vector representation with exact **same index ordering**.
+Each job position MUST have vector representation with exact **same index ordering**.
 
 Example, Job #17:
 
@@ -164,34 +153,10 @@ Example, Job #17:
 [1,1,1,0]
 ```
 
----
-
-## Where do I deploy InnerMatch?
-
-→ Available on **Google Cloud Marketplace**
-
-Spin up, get endpoint URL. Done.
-
----
-
-# HOW THE SYSTEM WORKS
-
 ### step 1, /follow
 
-Send the query + all candidates.
+Send the query + all candidates job.
 InnerMatch responds with ranked matches.
-
-### step 2, user interacts (clicks, dwell time, etc)
-
-Send those interactions as feedback to `/feedback`.
-
-### Step 3, The model evolves in this session
-
-At any moment, call `/features` → InnerMatch will output the current importance weights it learned.
-
----
-
-# API
 
 ## 1) POST /follow
 
@@ -214,11 +179,10 @@ At any moment, call `/features` → InnerMatch will output the current importanc
 
 **response:** ranked matched targets
 
----
+### step 2, user interacts (clicks, dwell time, etc)
 
+Send those interactions as feedback to `/feedback`.
 ## 2) POST /feedback
-
-**Purpose:** teach InnerMatch what the user actually liked/disliked
 
 **body:**
 
@@ -238,7 +202,9 @@ At any moment, call `/features` → InnerMatch will output the current importanc
 
 Note: You may send multiple feedback objects in one call as arrays.
 
----
+### step 3, the model evolves in this session
+
+At any moment, call `/features` → InnerMatch will output the current importance weights it learned.
 
 ## 3) POST /features
 
@@ -257,23 +223,25 @@ Note: You may send multiple feedback objects in one call as arrays.
 
 **response:** a score per feature.
 
-> see all endpoints documentation for details on /docs.
-
 ---
 
 # FAQ
 
-### Can InnerMatch work with sparse high-dimensional vectors?
+### Can InnerMatch work with sparse high dimensional vectors?
 
 Yes. Even 20,000 + features is fine.
 
-### Does the order of array indexes matter?
+### Does order of array indexes matter?
 
 **Yes.** It must remain consistent across query + targets + feedback.
 
-### Can I update the model during the same session at any time?
+### Can I update model during the same session any time?
 
-Yes. InnerMatch is an online learning, instant and adaptive.
+Yes. InnerMatch is online learning, instant adaptive.
+
+### Where do I deploy InnerMatch?
+
+Available on **Google Cloud Marketplace**
 
 ---
 
@@ -284,5 +252,5 @@ It is a **self-correcting matcher**.
 
 You send vectors, it learns, per user, per session.
 
-By the time the user has interacted with 5–15 items, the system now understands **what they were really searching for**.
+By the time user has interacted with 5–15 items, the system now understands **what they were really searching for**.
 
